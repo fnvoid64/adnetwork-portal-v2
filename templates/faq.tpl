@@ -1,0 +1,1 @@
+		{include file="header.tpl"}		<div class="menu">FAQ HERE</div>		{include file="footer.tpl"}

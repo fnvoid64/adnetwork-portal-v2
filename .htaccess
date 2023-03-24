@@ -1,0 +1,53 @@
+RewriteEngine On
+
+#Site Rewrite Rules
+RewriteRule ^dashboard/new_site.html$ new_site.php [NC,QSA,L]
+RewriteRule ^dashboard/delete_site.html$ sites.php?act=del [NC,QSA,L]
+
+#Advertise Rewrite Rules
+RewriteRule ^dashboard/campaigns.html$ ads.php [NC,QSA,L]
+RewriteRule ^dashboard/campaigns/([a-zA-Z0-9]+).html$ ads.php?act=$1 [NC,QSA,L]
+RewriteRule ^ads/([a-zA-Z0-9]+)/id/([0-9]+)$ ads.php?act=$1&id=$2 [NC,QSA,L]
+
+#Adcodes Rules
+RewriteRule ^adcodes/([0-9]+)$ adcodes.php?id=$1 [NC,QSA,L]
+
+#Payment Rules
+RewriteRule ^dashboard/payment.html$ payment.php [NC,QSA,L]
+
+#Statistics Rules
+RewriteRule ^dashboard/reports.html$ stats.php [NC,QSA,L]
+
+#Invoices Rues
+RewriteRule ^invoices$ invoices.php [NC,QSA,L]
+RewriteRule ^invoices/([a-zA-Z0-9]+)/id/([0-9]+)$ invoices.php?act=$1&id=$2 [NC,QSA,L]
+
+#Overall
+RewriteRule ^register.html$ register.php [NC,QSA,L]
+RewriteRule ^register/verify$ register.php?act=verify [NC,QSA,L]
+RewriteRule ^dashboard/login.html$ login.php [NC,QSA,L]
+RewriteRule ^dashboard/index.html$ dashboard.php [NC,QSA,L]
+RewriteRule ^dashboard/edit_profile.html$ account.php [NC,QSA,L]
+RewriteRule ^dashboard/change_password.html$ cp.php [NC,QSA,L]
+RewriteRule ^dashboard/logout$ logout.php [NC,QSA,L]
+RewriteRule ^lost_password.html$ lp.php [NC,QSA,L]
+RewriteRule ^reset_password.html$ lp.php?act=reset [NC,QSA,L]
+RewriteRule ^news/([0-9]+)$ news.php?news=$1 [NC,QSA,L]
+RewriteRule ^notifications$ notifications.php [NC,QSA,L]
+RewriteRule ^notifications/([0-9]+)$ notifications.php?id=$1 [NC,QSA,L]
+
+#Extras
+RewriteRule ^home/([a-zA-Z0-9]+)$ ext.php?act=$1 [NC,QSA,L]
+
+RewriteCond %{HTTP_HOST} ads.adimoney.com [NC]
+RewriteRule ^go$	deliver.php?pr=click [NC,QSA]
+RewriteRule ^serve.js/([0-9]+)$	deliver.php?type=js&site_id=$1 [NC]
+RewriteRule ^serve.html/([0-9]+)$	deliver.php?type=link&site_id=$1 [L]
+
+#Error Handling
+ErrorDocument 404 /ext.php?act=error&type=404
+ErrorDocument 403 /ext.php?act=error&type=403
+ErrorDocument 500 /ext.php?act=error&type=500
+
+#RewriteCond %{HTTP_HOST} *.pr$
+#RewriteRule ^(.*)$ /w/$1 [L]
